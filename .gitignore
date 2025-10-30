@@ -1,0 +1,44 @@
+# ---- Python ----
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg-info/
+.python-version
+
+# ---- Environments ----
+.env
+.env.*
+.venv/
+venv/
+env/
+
+# ---- Editors/IDE ----
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ---- Build/Dist ----
+build/
+dist/
+site/
+htmlcov/
+.pytest_cache/
+.mypy_cache/
+coverage.xml
+.coverage*
+
+# ---- OS/General ----
+.DS_Store
+Thumbs.db
+
+# ---- Streamlit/Outputs ----
+portraits.zip
+portrait_*.jpg
+portrait_main.jpg
+
+# ---- Logs ----
+*.log
+
