@@ -10,11 +10,10 @@ CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 if CURRENT_DIR not in sys.path:
     sys.path.insert(0, CURRENT_DIR)
 
-"""Optional runtime installer
-If deploying to Streamlit Community Cloud, requirements.txt is sufficient and preferred.
-This block allows installing missing packages at runtime when the env var
-`ALLOW_RUNTIME_INSTALL` is set to 1/true. After installing, the app reruns once.
-"""
+# Optional runtime installer note:
+# If deploying to Streamlit Community Cloud, requirements.txt is sufficient and preferred.
+# This block allows installing missing packages at runtime when the env var
+# ALLOW_RUNTIME_INSTALL is set to 1/true. After installing, the app reruns once.
 try:
     from utils.bootstrap import ensure_packages  # type: ignore
 except Exception:
@@ -134,4 +133,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
