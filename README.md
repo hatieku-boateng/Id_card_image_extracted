@@ -56,6 +56,24 @@ streamlit run src/app.py
 
 Open the local URL shown in the terminal.
 
+### Optional: Install dependencies at runtime
+This repo also includes a small bootstrapper that can install missing packages when the app starts. This is intended for local development or environments that allow on‑the‑fly installs and may add startup time.
+
+Enable it by setting an environment variable before launching Streamlit:
+
+- Windows PowerShell
+```powershell
+$env:ALLOW_RUNTIME_INSTALL = "1"
+streamlit run src/app.py
+```
+
+- macOS/Linux
+```bash
+ALLOW_RUNTIME_INSTALL=1 streamlit run src/app.py
+```
+
+Note: On Streamlit Community Cloud, using `requirements.txt` is the recommended way. The runtime installer will only run when `ALLOW_RUNTIME_INSTALL` is set.
+
 ## Using the App
 - Upload an image of an ID card (`.jpg`, `.jpeg`, `.png`, `.webp`).
 - Sidebar options:

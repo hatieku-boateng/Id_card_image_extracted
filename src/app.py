@@ -5,15 +5,37 @@ import zipfile
 from dataclasses import dataclass
 from typing import List, Tuple
 
-import cv2
-import numpy as np
-from PIL import Image
-import streamlit as st
-
 # Allow running with `streamlit run src/app.py` by ensuring `src` is on sys.path
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 if CURRENT_DIR not in sys.path:
     sys.path.insert(0, CURRENT_DIR)
+
+"""Optional runtime installer
+If deploying to Streamlit Community Cloud, requirements.txt is sufficient and preferred.
+This block allows installing missing packages at runtime when the env var
+`ALLOW_RUNTIME_INSTALL` is set to 1/true. After installing, the app reruns once.
+"""
+try:
+    from utils.bootstrap import ensure_packages  # type: ignore
+except Exception:
+    # utils may not exist; skip runtime install support
+    ensure_packages = None  # type: ignore
+
+installed_runtime = False
+if ensure_packages is not None:
+    try:
+        installed_runtime = ensure_packages(allow_runtime=True)
+    except Exception:
+        installed_runtime = False
+
+import streamlit as st
+if installed_runtime:
+    st.info("Installed missing packages. Rerunning once…")
+    st.rerun()
+
+import cv2
+import numpy as np
+from PIL import Image
 
 from face_extractor.detector import detect_faces, crop_regions
 
