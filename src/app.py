@@ -29,8 +29,10 @@ if ensure_packages is not None:
         installed_runtime = False
 
 import streamlit as st
+# Must be the first Streamlit command in the script
+st.set_page_config(page_title="ID Portrait Extractor", page_icon="🆔", layout="centered")
 if installed_runtime:
-    st.info("Installed missing packages. Rerunning once…")
+    st.info("Installed missing packages. Rerunning once...")
     st.rerun()
 
 import cv2
@@ -70,7 +72,6 @@ def to_download_bytes(img: np.ndarray, ext: str = ".jpg") -> bytes:
 
 
 def main():
-    st.set_page_config(page_title="ID Portrait Extractor", page_icon="🪪", layout="centered")
     st.title("ID Portrait Extractor")
     st.caption("No-training approach using MediaPipe face detection to crop portrait(s) from ID images.")
 
@@ -88,8 +89,6 @@ def main():
         st.stop()
 
     image_bgr = load_image_to_bgr(uploaded)
-    h, w = image_bgr.shape[:2]
-
     detections = detect_faces(image_bgr, min_confidence=conf)
 
     if len(detections) == 0:
@@ -110,7 +109,6 @@ def main():
     st.image(cv2.cvtColor(vis, cv2.COLOR_BGR2RGB), caption="Detections", use_container_width=True)
 
     crops = crop_regions(image_bgr, boxes, margin_percent=margin)
-
     if len(crops) == 0:
         st.error("Failed to crop faces.")
         st.stop()
@@ -136,3 +134,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
