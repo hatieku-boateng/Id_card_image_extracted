@@ -72,7 +72,10 @@ streamlit run src/app.py
 ALLOW_RUNTIME_INSTALL=1 streamlit run src/app.py
 ```
 
-Note: On Streamlit Community Cloud, using `requirements.txt` is the recommended way. The runtime installer will only run when `ALLOW_RUNTIME_INSTALL` is set.
+Notes for Streamlit Community Cloud
+- This project uses OpenCV’s Haar cascade by default (no external system libs). The dependency is `opencv-python-headless`, which is Cloud‑friendly.
+- MediaPipe is optional. If you want to enable it, add `mediapipe` to `requirements.txt` (and ensure the selected Python version is supported by the wheel). The app automatically uses MediaPipe when available.
+- If deploy builds fail due to Python version compatibility, add `runtime.txt` with a supported version (e.g., `3.10`).
 
 ## Using the App
 - Upload an image of an ID card (`.jpg`, `.jpeg`, `.png`, `.webp`).

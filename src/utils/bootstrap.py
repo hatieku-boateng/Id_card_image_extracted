@@ -16,8 +16,8 @@ from typing import Dict, Optional
 DEFAULT_PACKAGES: Dict[str, Optional[str]] = {
     # pip name: exact version or None for latest
     "streamlit": None,
-    "mediapipe": None,
-    "opencv-python": None,
+    # Use headless OpenCV by default for cloud environments
+    "opencv-python-headless": None,
     "numpy": None,
     "Pillow": None,
 }
@@ -70,4 +70,3 @@ def ensure_packages(packages: Dict[str, Optional[str]] = None, allow_runtime: bo
             # Ignore failures to avoid breaking the app; user can install manually.
             pass
     return installed_any
-
